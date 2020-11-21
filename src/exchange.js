@@ -1,14 +1,16 @@
-import Binance from 'node-binance-api'
-
-
 class Exchange {
 
     async price() {
-        const binance = new Binance()
-        const ticker = await binance.prices('BTCUSDT');
-        return ticker.BTCUSDT
+        return binancePrice()
     }
 
+}
+
+function binancePrice() {
+
+    return fetch('https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT')
+        .then(response => response.json())
+        .then(data => data.price)
 }
 
 export default Exchange
