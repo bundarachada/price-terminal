@@ -1,25 +1,37 @@
-import logo from './logo.svg';
 import './App.css';
+import Terminal from 'react-console-emulator'
+import React from "react";
+// import Binance from 'node-binance-api'
+// const binance = new Binance()
+
+
+//const terminal = React.createRef()
+const commands = {
+    btc: {
+        description: 'Echo a passed string.',
+        usage: 'echo <string>',
+        fn: function () {
+
+            // binance.prices('BTCUSDT', (error, ticker) => {
+            //     terminal.current.pushToStdout(`${ticker.BTCUSDT}`)
+            // });
+            return `Running, please wait...`
+        }
+    }
+}
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+
+
+        <Terminal
+            // ref={terminal}
+            commands={commands}
+            welcomeMessage={'Welcome to price terminal! Enter with command. E.g: btc'}
+            promptLabel={'>'}
+        />
+
+    );
 }
 
 export default App;
