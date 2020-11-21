@@ -2,6 +2,9 @@ import './App.css';
 import Terminal from 'terminal-in-react';
 import React from "react";
 
+const Binance = require('node-binance-api');
+const binance = new Binance()
+
 function App() {
     return (
         <div style={{display: "flex", justifyContent: "center", alignItems: "center", height: "100vh"}}>
@@ -10,21 +13,13 @@ function App() {
                 backgroundColor='black'
                 barColor='black'
                 style={{fontWeight: "bold", fontSize: "1em"}}
-                commands={{
-                    btc: {
-                        method: (args, print, runCommand) => {
-                            print(`The price is ${args._[0] || args.color} ${runCommand}`);
-                        },
-                        options: [
-                            {
-                                name: 'color',
-                                description: 'The color the output should be',
-                                defaultValue: 'white',
-                            },
-                        ],
-                    },
+                commandPassThrough={ (cmd, print) => {
+                    binance.prices('BTCUSDT', (error, ticker) => {
+                        print(`${ticker.BTCUSDT}`);
+                    });
+
                 }}
-                msg='You can write anything here. Example - Hello! My name is Foo and I like Bar.'/>
+                msg='Enter with coin to check USD price.'/>
         </div>
     );
 }
