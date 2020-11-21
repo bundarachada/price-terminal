@@ -1,20 +1,25 @@
 import './App.css';
 import Terminal from 'react-console-emulator'
 import React from "react";
-// import Binance from 'node-binance-api'
-// const binance = new Binance()
+import Exchange from "./exchange";
 
 
-//const terminal = React.createRef()
+
+const terminal = React.createRef()
 const commands = {
     btc: {
         description: 'Echo a passed string.',
         usage: 'echo <string>',
         fn: function () {
+            const exchange = new Exchange()
 
-            // binance.prices('BTCUSDT', (error, ticker) => {
-            //     terminal.current.pushToStdout(`${ticker.BTCUSDT}`)
-            // });
+            exchange
+                .price()
+                .then(price => terminal.current.pushToStdout(`${price}`))
+                .catch(error => terminal.current.pushToStdout(`${error}`))
+
+
+
             return `Running, please wait...`
         }
     }
@@ -25,7 +30,7 @@ function App() {
 
 
         <Terminal
-            // ref={terminal}
+            ref={terminal}
             commands={commands}
             welcomeMessage={'Welcome to price terminal! Enter with command. E.g: btc'}
             promptLabel={'>'}
