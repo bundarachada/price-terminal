@@ -17,7 +17,6 @@ function App() {
                     binance.prices('BTCUSDT', (error, ticker) => {
                         print(`${ticker.BTCUSDT}`);
                     });
-
                 }}
                 msg='Enter with coin to check USD price.'/>
         </div>
