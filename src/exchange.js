@@ -1,14 +1,14 @@
 class Exchange {
 
-    async price() {
-        return binancePrice()
+    async price(pair) {
+        return binancePrice(pair)
     }
 
 }
 
-function binancePrice() {
+function binancePrice(pair) {
 
-    return fetch('https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT')
+    return fetch(`https://api.binance.com/api/v3/ticker/price?symbol=${pair}`)
         .then(response => response.json())
         .then(data => data.price)
 }

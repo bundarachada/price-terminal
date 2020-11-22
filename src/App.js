@@ -1,7 +1,7 @@
 import './App.css';
 import Terminal from 'react-console-emulator'
 import React from "react";
-import Exchange from "./exchange";
+import CommandFlow from "./command-flow";
 
 const terminal = React.createRef()
 
@@ -10,14 +10,16 @@ const commands = {
     eth: {fn: (...args) => run('eth', args)}
 }
 
-function run(args) {
-    const exchange = new Exchange()
-    exchange
-        .price()
+function run() {
+
+    const commandFlow = new CommandFlow(arguments)
+
+    commandFlow
+        .execute()
         .then(price => terminal.current.pushToStdout(`${price}`))
         .catch(error => terminal.current.pushToStdout(`${error}`))
 
-    return `${arguments[0] + arguments[1]}`
+    return `Please wait ...`
 }
 
 function App() {
