@@ -4,17 +4,17 @@ const exchange = new Exchange()
 
 class CommandFlow {
 
-    constructor(args) {
-        this.args = args
+    constructor(cmd) {
+        this.cmd = cmd
     }
 
     async execute() {
-        if (only1arg(this.args)) {
-            return getPriceDefaultCoin(this.args[0])
+        if (only1arg(this.cmd)) {
+            return getPriceDefaultCoin(this.cmd[0])
         }
 
-        if (secondArgIsNumber(this.args)) {
-            return calculateAmount(this.args)
+        if (secondArgIsNumber(this.cmd)) {
+            return calculateAmount(this.cmd)
         }
 
         return `Nothing ...`
@@ -22,12 +22,12 @@ class CommandFlow {
 
 }
 
-function only1arg(args) {
-    return args[1].length === 0
+function only1arg(cmd) {
+    return cmd.length === 1
 }
 
-function secondArgIsNumber(args) {
-    return !isNaN(args[1][0])
+function secondArgIsNumber(cmd) {
+    return !isNaN(cmd[1])
 }
 
 async function getPriceDefaultCoin(coin) {
@@ -38,11 +38,10 @@ async function getPriceDefaultCoin(coin) {
     return `Error, try again ...`
 }
 
-async function calculateAmount(args) {
-    const price = await getPriceDefaultCoin(args[0])
-    const quantity = args[1][0]
+async function calculateAmount(cmd) {
+    const price = await getPriceDefaultCoin(cmd[0])
+    const quantity = cmd[1]
     return Number(price) * Number(quantity);
-
 }
 
 function validateCoin(coin) {
