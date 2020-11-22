@@ -13,11 +13,4 @@ function binancePrice(pair) {
         .then(data => data.price)
 }
 
-
-function getAllBaseAssetBinance() {
-
-    return fetch(`https://api.binance.com/api/v3/exchangeInfo`)
-        .then(response => response.json())
-        .then(data => data.price)
-}
 export default Exchange
