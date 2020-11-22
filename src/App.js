@@ -3,39 +3,32 @@ import Terminal from 'react-console-emulator'
 import React from "react";
 import Exchange from "./exchange";
 
-
-
 const terminal = React.createRef()
+
 const commands = {
-    btc: {
-        description: 'Echo a passed string.',
-        usage: 'echo <string>',
-        fn: function () {
-            const exchange = new Exchange()
+    btc: {fn: (...args) => run('btc', args)},
+    eth: {fn: (...args) => run('eth', args)}
+}
 
-            exchange
-                .price()
-                .then(price => terminal.current.pushToStdout(`${price}`))
-                .catch(error => terminal.current.pushToStdout(`${error}`))
+function run(args) {
+    const exchange = new Exchange()
+    exchange
+        .price()
+        .then(price => terminal.current.pushToStdout(`${price}`))
+        .catch(error => terminal.current.pushToStdout(`${error}`))
 
-
-
-            return `Running, please wait...`
-        }
-    }
+    return `${arguments[0] + arguments[1]}`
 }
 
 function App() {
+
     return (
-
-
         <Terminal
             ref={terminal}
             commands={commands}
             welcomeMessage={'Welcome to price terminal! Enter with command. E.g: btc'}
             promptLabel={'>'}
         />
-
     );
 }
 
