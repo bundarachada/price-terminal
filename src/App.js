@@ -27,8 +27,11 @@ function App() {
                 color='green'
                 backgroundColor='black'
                 barColor='black'
-                style={{fontWeight: "bold", fontSize: "1.2em"}}
-                msg='You can write coin to check price in USD. Example - btc'
+                startState='maximised'
+                hideTopBar={true}
+                allowTabs={false}
+                style={{fontWeight: "bold", fontSize: "1.5em"}}
+                msg="You can write coin to check price in USD. Example - btc"
                 commandPassThrough={(cmd, print) => {
                     run(cmd, print)
                 }}
