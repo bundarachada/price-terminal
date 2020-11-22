@@ -26,8 +26,8 @@ function only1arg(cmd) {
     return cmd.length === 1
 }
 
-function secondArgIsNumber(args) {
-    return !isNaN(args[1][0])
+function secondArgIsNumber(cmd) {
+    return !isNaN(cmd[1])
 }
 
 async function getPriceDefaultCoin(coin) {
@@ -38,9 +38,9 @@ async function getPriceDefaultCoin(coin) {
     return `Error, try again ...`
 }
 
-async function calculateAmount(args) {
-    const price = await getPriceDefaultCoin(args[0])
-    const quantity = args[1][0]
+async function calculateAmount(cmd) {
+    const price = await getPriceDefaultCoin(cmd[0])
+    const quantity = cmd[1]
     return Number(price) * Number(quantity);
 }
 
