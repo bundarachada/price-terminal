@@ -26,10 +26,10 @@ function App() {
             <Terminal
                 color='green'
                 backgroundColor='black'
-                hideTopBar='true'
                 barColor='black'
                 startState='maximised'
-                allowTabs='false'
+                hideTopBar={true}
+                allowTabs={false}
                 style={{fontWeight: "bold", fontSize: "1.2em"}}
                 msg='You can write coin to check price in USD. Example - btc'
                 commandPassThrough={(cmd, print) => {
